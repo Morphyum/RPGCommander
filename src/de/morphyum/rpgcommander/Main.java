@@ -12,7 +12,7 @@ import de.morphyum.rpgcommander.objects.Weapon;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		String name= "Morphyum";
-		int hitPoints= 100;
+
 		int manaPoints = 0;
 		int defence = 2;
 		int critical= 0;
@@ -20,20 +20,20 @@ public class Main {
 		int level = 1;
 		int strength = 5;
 		int dexterity= 5;
-		int vitality= 0;
+		int vitality= 5;
 		int intelligence = 0;
-		Head headSlot = new Head("No Helm", 0, 5, 5, 0, 0, 0);
-		Boot bootSlot= new Boot("No Boots", 0, 5, 5, 0, 0, 0);
-		Chest chestSlot= new Chest("No Armor", 0, 5, 5, 0, 0, 0);
-		Weapon weaponSlot= new Weapon("No Weapon", 0, 5, 5, 0, 0, 2);
+		Head headSlot = new Head("No Helm", 0, 5, 5, 0, 5, 0);
+		Boot bootSlot= new Boot("No Boots", 0, 5, 5, 0, 5, 0);
+		Chest chestSlot= new Chest("No Armor", 0, 5, 5, 0, 5, 0);
+		Weapon weaponSlot= new Weapon("No Weapon", 0, 5, 5, 0, 5, 2);
 		Item[] inventory= null;
 		int experience=0;
 		int money=0;
-		Hero morphyum = new Hero(name, hitPoints, manaPoints, defence, critical, hitValue, level, strength, dexterity, vitality, intelligence, headSlot, bootSlot,
+		Hero morphyum = new Hero(name, manaPoints, defence, critical, hitValue, level, strength, dexterity, vitality, intelligence, headSlot, bootSlot,
 				chestSlot, weaponSlot, inventory, experience, money);
 		
 		name= "Blob";
-		hitPoints= 50;
+		int hitPoints= 50;
 		manaPoints = 0;
 		int attack = 4;
 		defence = 5;
