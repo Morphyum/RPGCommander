@@ -29,8 +29,8 @@ public class Chara extends Entity {
 		float atkModifier = 1;
 		float dodgeModifier = 1;
 		Random random = new Random();
-		atkModifier = random.nextFloat() * (2f - 0f);
-		dodgeModifier = random.nextFloat() * (2f - 0f);
+		atkModifier = random.nextFloat() * (2f);
+		dodgeModifier = random.nextFloat() * (2f);
 		if(this.hitValue*atkModifier > enemy.getDodge() * dodgeModifier){
 			enemy.gotHit(this.attack);
 		} else {

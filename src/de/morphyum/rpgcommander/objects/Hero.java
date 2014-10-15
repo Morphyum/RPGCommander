@@ -13,10 +13,10 @@ public class Hero extends Chara {
 	private int experience;
 	private int money;
 
-	public Hero(String name, int hitPoints, int manaPoints, int attack, int defence, int dodge, int critical, int hitValue, int level, int strength,
-			int dexterity, int vitality, int intelligence, Head headSlot, Boot bootSlot, Chest chestSlot, Weapon weaponSlot, Item[] inventory, int experience,
-			int money) {
-		super(name, hitPoints, manaPoints, attack, defence, dodge, critical, hitValue, level);
+	public Hero(String name, int hitPoints, int manaPoints, int attack, int defence, int critical, int hitValue, int level, int strength, int dexterity, int vitality,
+			int intelligence, Head headSlot, Boot bootSlot, Chest chestSlot, Weapon weaponSlot, Item[] inventory, int experience, int money) {
+		super(name, hitPoints, manaPoints, attack, defence, calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
+				weaponSlot.getDexBonus()), critical, hitValue, level);
 		this.setStrength(strength);
 		this.setDexterity(dexterity);
 		this.setVitality(vitality);
@@ -29,6 +29,11 @@ public class Hero extends Chara {
 		this.setExperience(experience);
 		this.setMoney(money);
 
+	}
+
+	private static int calcDodge(int dexterity, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus) {
+		int totalDex = dexterity + headBonus + chestBonus + bootBonus + weaponBonus;
+		return totalDex * level;
 	}
 
 	public int getStrength() {

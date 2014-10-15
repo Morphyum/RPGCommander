@@ -31,7 +31,7 @@ public class Main {
 		Item[] inventory= null;
 		int experience=0;
 		int money=0;
-		Hero morphyum = new Hero(name, hitPoints, manaPoints, attack, defence, dodge, critical, hitValue, level, strength, dexterity, vitality, intelligence, headSlot, bootSlot,
+		Hero morphyum = new Hero(name, hitPoints, manaPoints, attack, defence, critical, hitValue, level, strength, dexterity, vitality, intelligence, headSlot, bootSlot,
 				chestSlot, weaponSlot, inventory, experience, money);
 		
 		name= "Blob";
