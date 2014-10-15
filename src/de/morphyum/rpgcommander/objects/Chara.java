@@ -1,5 +1,7 @@
 package de.morphyum.rpgcommander.objects;
 
+import java.util.Random;
+
 public class Chara extends Entity {
 	private int hitPoints;
 	private int manaPoints;
@@ -24,8 +26,15 @@ public class Chara extends Entity {
 	}
 	
 	public void attack(Chara enemy){
-		if(this.hitValue > enemy.getDodge()){
+		float atkModifier = 1;
+		float dodgeModifier = 1;
+		Random random = new Random();
+		atkModifier = random.nextFloat() * (2f - 0f);
+		dodgeModifier = random.nextFloat() * (2f - 0f);
+		if(this.hitValue*atkModifier > enemy.getDodge() * dodgeModifier){
 			enemy.gotHit(this.attack);
+		} else {
+			System.out.println(enemy.getName()+" dodged");
 		}
 	}
 	
