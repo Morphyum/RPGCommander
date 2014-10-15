@@ -13,9 +13,10 @@ public class Hero extends Chara {
 	private int experience;
 	private int money;
 
-	public Hero(String name, int hitPoints, int manaPoints, int attack, int defence, int critical, int hitValue, int level, int strength, int dexterity, int vitality,
+	public Hero(String name, int hitPoints, int manaPoints, int defence, int critical, int hitValue, int level, int strength, int dexterity, int vitality,
 			int intelligence, Head headSlot, Boot bootSlot, Chest chestSlot, Weapon weaponSlot, Item[] inventory, int experience, int money) {
-		super(name, hitPoints, manaPoints, attack, defence, calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
+		super(name, hitPoints, manaPoints, calcAttack(strength, level, headSlot.getStrBonus(), chestSlot.getStrBonus(), bootSlot.getStrBonus(), weaponSlot.getStrBonus(),
+				weaponSlot.getAttackValue()), defence, calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
 				weaponSlot.getDexBonus()), critical, hitValue, level);
 		this.setStrength(strength);
 		this.setDexterity(dexterity);
@@ -34,6 +35,11 @@ public class Hero extends Chara {
 	private static int calcDodge(int dexterity, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus) {
 		int totalDex = dexterity + headBonus + chestBonus + bootBonus + weaponBonus;
 		return totalDex * level;
+	}
+
+	private static int calcAttack(int strength, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus, int weaponAtk) {
+		int totalStr = strength + headBonus + chestBonus + bootBonus + weaponBonus;
+		return (totalStr * level) + weaponAtk;
 	}
 
 	public int getStrength() {
