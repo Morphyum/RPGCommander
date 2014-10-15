@@ -9,11 +9,10 @@ import de.morphyum.rpgcommander.objects.Item;
 import de.morphyum.rpgcommander.objects.Monster;
 import de.morphyum.rpgcommander.objects.Weapon;
 
-//0.1.7
+//0.1.8
 public class Main {
 	public static void main(String[] args) throws Exception {
 		String name= "Morphyum";
-		int critical= 0;
 		int level = 1;
 		int strength = 5;
 		int dexterity= 5;
@@ -26,7 +25,7 @@ public class Main {
 		Item[] inventory= null;
 		int experience=0;
 		int money=0;
-		Hero morphyum = new Hero(name, critical, level, strength, dexterity, vitality, intelligence, headSlot, bootSlot,
+		Hero morphyum = new Hero(name, level, strength, dexterity, vitality, intelligence, headSlot, bootSlot,
 				chestSlot, weaponSlot, inventory, experience, money);
 		
 		name= "Blob";
@@ -34,8 +33,8 @@ public class Main {
 		int manaPoints = 0;
 		int attack = 20;
 		int defence = 5;
-		int dodge = 5;
-		critical= 0;
+		int dodge = 15;
+		int critical= 20;
 		int hitValue = 50;
 		level = 1;
 		int xpBonus=0;
@@ -47,7 +46,7 @@ public class Main {
 		manaPoints = 0;
 		attack = 20;
 		defence = 5;
-		dodge = 5;
+		dodge = 15;
 		critical= 0;
 		hitValue = 10;
 		level = 1;

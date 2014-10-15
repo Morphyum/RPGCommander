@@ -28,11 +28,18 @@ public class Chara extends Entity {
 	public void attack(Chara enemy) {
 		float atkModifier = 1;
 		float dodgeModifier = 1;
+		float critModifier = 1;
 		Random random = new Random();
 		atkModifier = random.nextFloat() * (2f);
 		dodgeModifier = random.nextFloat() * (2f);
 		if (this.hitValue * atkModifier > enemy.getDodge() * dodgeModifier) {
-			enemy.gotHit(this.attack);
+			critModifier = random.nextFloat() * (2f);
+			if ((this.critical * critModifier) > (enemy.getDodge()*2)) {
+				System.out.println("CRIT!");
+				enemy.gotHit(this.attack * 2);
+			} else {
+				enemy.gotHit(this.attack);
+			}
 		} else {
 			System.out.println(enemy.getName() + " dodged");
 		}

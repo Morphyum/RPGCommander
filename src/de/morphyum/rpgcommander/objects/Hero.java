@@ -13,19 +13,16 @@ public class Hero extends Chara {
 	private int experience;
 	private int money;
 
-	public Hero(String name, int critical, int level, int strength, int dexterity, int vitality, int intelligence, Head headSlot,
-			Boot bootSlot, Chest chestSlot, Weapon weaponSlot, Item[] inventory, int experience, int money) {
-		super(	name, 
-				calcHitPoints(vitality, level, headSlot.getVitBonus(), chestSlot.getVitBonus(), bootSlot.getVitBonus(), weaponSlot.getVitBonus()),
+	public Hero(String name, int level, int strength, int dexterity, int vitality, int intelligence, Head headSlot, Boot bootSlot,
+			Chest chestSlot, Weapon weaponSlot, Item[] inventory, int experience, int money) {
+		super(name, calcHitPoints(vitality, level, headSlot.getVitBonus(), chestSlot.getVitBonus(), bootSlot.getVitBonus(), weaponSlot.getVitBonus()),
 				calcManaPoints(intelligence, level, headSlot.getIntBonus(), chestSlot.getIntBonus(), bootSlot.getIntBonus(), weaponSlot.getIntBonus()),
 				calcAttack(strength, level, headSlot.getStrBonus(), chestSlot.getStrBonus(), bootSlot.getStrBonus(), weaponSlot.getStrBonus(),
-						weaponSlot.getAttackValue()), 
-				calcDefence(vitality, level, headSlot.getDefenceValue(), chestSlot.getDefenceValue(), bootSlot.getDefenceValue()), 
-				calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(),
-						bootSlot.getDexBonus(), weaponSlot.getDexBonus()), 
-				critical, 
-				calcHitValue(dexterity, level, headSlot.getDexBonus(),chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()), 
-				level);
+						weaponSlot.getAttackValue()), calcDefence(vitality, level, headSlot.getDefenceValue(), chestSlot.getDefenceValue(),
+						bootSlot.getDefenceValue()), calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
+						weaponSlot.getDexBonus()), calcCrit(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
+						weaponSlot.getDexBonus()), calcHitValue(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
+						weaponSlot.getDexBonus()), level);
 		this.setStrength(strength);
 		this.setDexterity(dexterity);
 		this.setVitality(vitality);
@@ -40,6 +37,11 @@ public class Hero extends Chara {
 	}
 
 	private static int calcDodge(int dexterity, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus) {
+		int totalDex = dexterity + headBonus + chestBonus + bootBonus + weaponBonus;
+		return totalDex * level;
+	}
+
+	private static int calcCrit(int dexterity, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus) {
 		int totalDex = dexterity + headBonus + chestBonus + bootBonus + weaponBonus;
 		return totalDex * level;
 	}
@@ -63,11 +65,11 @@ public class Hero extends Chara {
 		int totalInt = intelligence + headBonus + chestBonus + bootBonus + weaponBonus;
 		return (totalInt * level);
 	}
-	
+
 	private static int calcDefence(int vitality, int level, int headBonus, int chestBonus, int bootBonus) {
-		return (vitality*level) + headBonus + chestBonus + bootBonus;
+		return (vitality * level) + headBonus + chestBonus + bootBonus;
 	}
-	
+
 	public int getStrength() {
 		return strength;
 	}
