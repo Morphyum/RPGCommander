@@ -33,7 +33,7 @@ public class Battle {
 			if ((this.goodGuys[i].getHitPoints() > 0) && (countAlive(this.badGuys) > 0)) {
 				System.out.println(this.goodGuys[i].getName() + " attacks");
 				this.goodGuys[i].attack(randomAliveChar(this.badGuys));
-			} else {
+			} else if(countAlive(this.goodGuys) <= 0) {
 				endBattle();
 				break;
 			}
