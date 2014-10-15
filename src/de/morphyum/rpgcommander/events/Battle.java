@@ -22,6 +22,7 @@ public class Battle {
 		while ((countAlive(this.badGuys) > 0) && (countAlive(this.goodGuys) > 0)) {
 			nextTurn();
 		}
+		endBattle();
 	}
 
 	private void nextTurn() {
@@ -34,7 +35,6 @@ public class Battle {
 				System.out.println(this.goodGuys[i].getName() + " attacks");
 				this.goodGuys[i].attack(randomAliveChar(this.badGuys));
 			} else if(countAlive(this.goodGuys) <= 0) {
-				endBattle();
 				break;
 			}
 		}
@@ -47,13 +47,10 @@ public class Battle {
 					System.out.println(this.badGuys[i].getName() + " attacks");
 					this.badGuys[i].attack(randomAliveChar(this.goodGuys));
 				} else if(countAlive(this.badGuys) <= 0) {
-					endBattle();
 					break;
 				} 
 			}
-		} else {
-			endBattle();
-		}
+		} 
 		System.out.println("");
 		System.out.println("");
 	}

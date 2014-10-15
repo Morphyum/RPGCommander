@@ -24,26 +24,34 @@ public class Chara extends Entity {
 		this.hitPoints = hitPoints;
 		this.level = level;
 	}
-	
-	public void attack(Chara enemy){
+
+	public void attack(Chara enemy) {
 		float atkModifier = 1;
 		float dodgeModifier = 1;
 		Random random = new Random();
 		atkModifier = random.nextFloat() * (2f);
 		dodgeModifier = random.nextFloat() * (2f);
-		if(this.hitValue*atkModifier > enemy.getDodge() * dodgeModifier){
+		if (this.hitValue * atkModifier > enemy.getDodge() * dodgeModifier) {
 			enemy.gotHit(this.attack);
 		} else {
-			System.out.println(enemy.getName()+" dodged");
+			System.out.println(enemy.getName() + " dodged");
 		}
 	}
-	
-	public void gotHit(int damage){
-		int lost = damage-defence;
-		this.hitPoints -= lost;
-		System.out.println(this.getName()+" lost " + lost + " HitPoints he has " + this.getHitPoints() + " now");
+
+	public void gotHit(int damage) {
+		int lost = damage - defence;
+		if (lost > 0) {
+			this.hitPoints -= lost;
+			if (this.hitPoints <= 0) {
+				System.out.println(this.getName() + " died");
+			} else {
+				System.out.println(this.getName() + " lost " + lost + " HitPoints he has " + this.getHitPoints() + " now");
+			}
+		} else {
+			System.out.println(this.getName() + " absorbed all damage");
+		}
 	}
-	
+
 	public int getHitPoints() {
 		return hitPoints;
 	}
