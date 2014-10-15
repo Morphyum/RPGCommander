@@ -45,11 +45,25 @@ public class Main {
 		int lootLevel=0;
 		Monster blob = new Monster(name, hitPoints, manaPoints, attack, defence, dodge, critical, hitValue, level, xpBonus, lootLevel);
 		
+		name= "Blob2";
+		hitPoints= 50;
+		manaPoints = 0;
+		attack = 4;
+		defence = 5;
+		dodge = 5;
+		critical= 0;
+		hitValue = 10;
+		level = 1;
+		xpBonus=0;
+		lootLevel=0;
+		Monster blob2 = new Monster(name, hitPoints, manaPoints, attack, defence, dodge, critical, hitValue, level, xpBonus, lootLevel);
+		
 		Hero[] heroes = new Hero[1];
 		heroes[0] = morphyum;
 		
-		Monster[] monsters = new Monster[1];
+		Monster[] monsters = new Monster[2];
 		monsters[0] = blob;
+		monsters[1] = blob2;
 		
 		Battle testBattle = new Battle(heroes, monsters);
 		testBattle.startBattle();
