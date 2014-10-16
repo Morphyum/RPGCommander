@@ -34,14 +34,14 @@ public class Chara extends Entity {
 		dodgeModifier = random.nextFloat() * (2f);
 		if (this.hitValue * atkModifier > enemy.getDodge() * dodgeModifier) {
 			critModifier = random.nextFloat() * (2f);
-			if ((this.critical * critModifier) > (enemy.getDodge()*2)) {
+			if ((this.critical * critModifier) > (enemy.getDodge()*4)) {
 				System.out.println("CRIT!");
 				enemy.gotHit(this.attack * 2);
 			} else {
 				enemy.gotHit(this.attack);
 			}
 		} else {
-			System.out.println(enemy.getName() + " dodged");
+			System.out.println("Missed");
 		}
 	}
 

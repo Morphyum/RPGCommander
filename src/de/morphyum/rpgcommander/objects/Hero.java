@@ -18,7 +18,7 @@ public class Hero extends Chara {
 		super(name, calcHitPoints(vitality, level, headSlot.getVitBonus(), chestSlot.getVitBonus(), bootSlot.getVitBonus(), weaponSlot.getVitBonus()),
 				calcManaPoints(intelligence, level, headSlot.getIntBonus(), chestSlot.getIntBonus(), bootSlot.getIntBonus(), weaponSlot.getIntBonus()),
 				calcAttack(strength, level, headSlot.getStrBonus(), chestSlot.getStrBonus(), bootSlot.getStrBonus(), weaponSlot.getStrBonus(),
-						weaponSlot.getAttackValue()), calcDefence(vitality, level, headSlot.getDefenceValue(), chestSlot.getDefenceValue(),
+						weaponSlot.getAttackValue()), calcDefence(headSlot.getDefenceValue(), chestSlot.getDefenceValue(),
 						bootSlot.getDefenceValue()), calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
 						weaponSlot.getDexBonus()), calcCrit(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
 						weaponSlot.getDexBonus()), calcHitValue(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
@@ -58,7 +58,7 @@ public class Hero extends Chara {
 
 	private static int calcHitPoints(int vitality, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus) {
 		int totalVit = vitality + headBonus + chestBonus + bootBonus + weaponBonus;
-		return (totalVit * level);
+		return (totalVit * level *2);
 	}
 
 	private static int calcManaPoints(int intelligence, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus) {
@@ -66,8 +66,8 @@ public class Hero extends Chara {
 		return (totalInt * level);
 	}
 
-	private static int calcDefence(int vitality, int level, int headBonus, int chestBonus, int bootBonus) {
-		return (vitality * level) + headBonus + chestBonus + bootBonus;
+	private static int calcDefence(int headBonus, int chestBonus, int bootBonus) {
+		return headBonus + chestBonus + bootBonus;
 	}
 
 	public int getStrength() {
