@@ -12,6 +12,7 @@ public class Chara extends Entity {
 	private int hitValue;
 	private int level;
 
+
 	public Chara(String name, int hitPoints, int manaPoints, int attack, int defence, int dodge, int critical, int hitValue, int level) {
 		super(name);
 		this.hitPoints = hitPoints;
@@ -25,38 +26,42 @@ public class Chara extends Entity {
 		this.level = level;
 	}
 
-	public void attack(Chara enemy) {
+	public String attack(Chara enemy) {
 		float atkModifier = 1;
 		float dodgeModifier = 1;
 		float critModifier = 1;
 		Random random = new Random();
+		String output = null;
 		atkModifier = random.nextFloat() * (2f);
 		dodgeModifier = random.nextFloat() * (2f);
 		if (this.hitValue * atkModifier > enemy.getDodge() * dodgeModifier) {
 			critModifier = random.nextFloat() * (2f);
 			if ((this.critical * critModifier) > (enemy.getDodge()*4)) {
-				System.out.println("CRIT!");
-				enemy.gotHit(this.attack * 2);
+				output= "CRIT! ";
+				output+=enemy.gotHit(this.attack * 2);
 			} else {
-				enemy.gotHit(this.attack);
+				output=enemy.gotHit(this.attack);
 			}
 		} else {
-			System.out.println("Missed");
+			output= "Missed";
 		}
+		return output;
 	}
 
-	public void gotHit(int damage) {
+	public String gotHit(int damage) {
 		int lost = damage - defence;
+		String output;
 		if (lost > 0) {
 			this.hitPoints -= lost;
 			if (this.hitPoints <= 0) {
-				System.out.println(this.getName() + " died");
+				output= this.getName() + " died";
 			} else {
-				System.out.println(this.getName() + " lost " + lost + " HitPoints he has " + this.getHitPoints() + " now");
+				output= this.getName() + " lost " + lost + " HitPoints he has " + this.getHitPoints() + " now";
 			}
 		} else {
-			System.out.println(this.getName() + " absorbed all damage");
+			output= this.getName() + " absorbed all damage";
 		}
+		return output;
 	}
 
 	public int getHitPoints() {
