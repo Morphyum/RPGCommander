@@ -14,14 +14,15 @@ public class Hero extends Chara {
 	private int money;
 	private int nextLevel;
 
-	public Hero(String name, int level, int strength, int dexterity, int vitality, int intelligence, Head headSlot, Boot bootSlot, Chest chestSlot, Weapon weaponSlot,
-			Item[] inventory, int experience, int money) {
-		super(name, calcHitPoints(vitality, level, headSlot.getVitBonus(), chestSlot.getVitBonus(), bootSlot.getVitBonus(), weaponSlot.getVitBonus()), calcManaPoints(intelligence,
-				level, headSlot.getIntBonus(), chestSlot.getIntBonus(), bootSlot.getIntBonus(), weaponSlot.getIntBonus()), calcAttack(strength, level, headSlot.getStrBonus(),
-				chestSlot.getStrBonus(), bootSlot.getStrBonus(), weaponSlot.getStrBonus(), weaponSlot.getAttackValue()), calcDefence(headSlot.getDefenceValue(),
-				chestSlot.getDefenceValue(), bootSlot.getDefenceValue()), calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
-				weaponSlot.getDexBonus()), calcCrit(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()),
-				calcHitValue(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()), level);
+	public Hero(String name, int level, int strength, int dexterity, int vitality, int intelligence, Head headSlot, Boot bootSlot, Chest chestSlot,
+			Weapon weaponSlot, Item[] inventory, int experience, int money) {
+		super(name, calcHitPoints(vitality, level, headSlot.getVitBonus(), chestSlot.getVitBonus(), bootSlot.getVitBonus(), weaponSlot.getVitBonus()),
+				calcManaPoints(intelligence, level, headSlot.getIntBonus(), chestSlot.getIntBonus(), bootSlot.getIntBonus(), weaponSlot.getIntBonus()),
+				calcAttack(strength, level, headSlot.getStrBonus(), chestSlot.getStrBonus(), bootSlot.getStrBonus(), weaponSlot.getStrBonus(),
+						weaponSlot.getAttackValue()), calcDefence(headSlot.getDefenceValue(), chestSlot.getDefenceValue(), bootSlot.getDefenceValue()),
+				calcDodge(dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()), calcCrit(
+						dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()), calcHitValue(
+						dexterity, level, headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()), level);
 		this.setStrength(strength);
 		this.setDexterity(dexterity);
 		this.setVitality(vitality);
@@ -33,18 +34,41 @@ public class Hero extends Chara {
 		this.setInventory(inventory);
 		this.setExperience(experience);
 		this.setMoney(money);
+		this.setNextLevel(calcNextLevel(level));
 	}
 
-	public void levelUp() {
+	public String levelUp() {
 		this.setLevel(this.getLevel() + 1);
+		this.setNextLevel(calcNextLevel(this.getLevel()));
+		this.setDexterity(this.getDexterity() + 1);
+		this.setStrength(this.getStrength() + 1);
+		this.setIntelligence(this.getIntelligence() + 1);
+		this.setVitality(this.getVitality() + 1);
+		this.setHitPoints(calcHitPoints(vitality, this.getLevel(), headSlot.getVitBonus(), chestSlot.getVitBonus(), bootSlot.getVitBonus(),
+				weaponSlot.getVitBonus()));
+		this.setManaPoints(calcManaPoints(intelligence, this.getLevel(), headSlot.getIntBonus(), chestSlot.getIntBonus(), bootSlot.getIntBonus(),
+				weaponSlot.getIntBonus()));
+		this.setAttack(calcAttack(strength, this.getLevel(), headSlot.getStrBonus(), chestSlot.getStrBonus(), bootSlot.getStrBonus(), weaponSlot.getStrBonus(),
+				weaponSlot.getAttackValue()));
+		this.setDefence(calcDefence(headSlot.getDefenceValue(), chestSlot.getDefenceValue(), bootSlot.getDefenceValue()));
+		this.setDodge(calcDodge(dexterity, this.getLevel(), headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()));
+		this.setCritical(calcCrit(dexterity, this.getLevel(), headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(), weaponSlot.getDexBonus()));
+		this.setHitValue(calcHitValue(dexterity, this.getLevel(), headSlot.getDexBonus(), chestSlot.getDexBonus(), bootSlot.getDexBonus(),
+				weaponSlot.getDexBonus()));
+		return "Levelup! " + this.getName() + " is now Level " + this.getLevel();
 	}
 
-	public void checkLevelUp() {
-		if(this.experience > this.nextLevel){
-			
-		}	
+	public String checkLevelUp() {
+		if (this.experience > this.nextLevel) {
+			return levelUp();
+		}
+		return null;
 	}
-	
+
+	private int calcNextLevel(int level) {
+		return level * 100 * level;
+	}
+
 	private static int calcDodge(int dexterity, int level, int headBonus, int chestBonus, int bootBonus, int weaponBonus) {
 		int totalDex = dexterity + headBonus + chestBonus + bootBonus + weaponBonus;
 		return totalDex * level;

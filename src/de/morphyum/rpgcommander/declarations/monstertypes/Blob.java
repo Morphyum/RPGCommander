@@ -39,7 +39,7 @@ public class Blob implements MonsterTypeInterface{
 
 	@Override
 	public int xpBonus() {
-		return 1;
+		return 10;
 	}
 
 	@Override

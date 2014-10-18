@@ -74,7 +74,8 @@ public class Battle {
 				totalXp += badGuys[j].getXpBonus();
 			}
 			this.goodGuys[i].setExperience(this.goodGuys[i].getExperience() + totalXp);
-			this.goodGuys[i].checkLevelUp();
+			output.showText("Heroes earned "+totalXp+ " XP");
+			output.showText(this.goodGuys[i].checkLevelUp());
 		}
 	}
 	
