@@ -37,6 +37,11 @@ public class Hero extends Chara {
 		this.setNextLevel(calcNextLevel(level));
 	}
 
+	public String toString() {
+		return "Name: " + this.getName() + "\nLevel: " + this.getLevel() + "\nXP: " + this.getExperience() + "/" + (this.getNextLevel())
+				+ "\nStr: " + this.getStrength() + "\nDex: " + this.getDexterity() + "\nInt: " + this.getIntelligence() + "\nVit: " + this.getVitality();
+	}
+
 	public String levelUp() {
 		this.setLevel(this.getLevel() + 1);
 		this.setNextLevel(calcNextLevel(this.getLevel()));

@@ -12,7 +12,7 @@ public class Battle {
 	private Monster[] badGuys;
 	private int turn;
 	private Output output;
-	
+
 	public Battle(Hero[] goodGuys, Monster[] badguys, Output output) {
 		this.setGoodGuys(goodGuys);
 		this.setBadGuys(badguys);
@@ -67,18 +67,20 @@ public class Battle {
 		}
 	}
 
-	private void awardXP(){
+	private void awardXP() {
+		int totalXp = 0;
+		for (int j = 0; j < badGuys.length; j++) {
+			totalXp += badGuys[j].getXpBonus();
+		}
 		for (int i = 0; i < goodGuys.length; i++) {
-			int totalXp = 0;
-			for (int j = 0; j < badGuys.length; j++) {
-				totalXp += badGuys[j].getXpBonus();
+			if (this.goodGuys[i].getHitPoints() > 0) {
+				this.goodGuys[i].setExperience(this.goodGuys[i].getExperience() + totalXp);
+				output.showText(this.goodGuys[i].getName() + " earned " + totalXp + " XP");
+				output.showText(this.goodGuys[i].checkLevelUp());
 			}
-			this.goodGuys[i].setExperience(this.goodGuys[i].getExperience() + totalXp);
-			output.showText("Heroes earned "+totalXp+ " XP");
-			output.showText(this.goodGuys[i].checkLevelUp());
 		}
 	}
-	
+
 	private Chara randomAliveChar(Chara[] group) {
 		Random rn = new Random();
 		int random;
