@@ -1,27 +1,41 @@
 package de.morphyum.rpgcommander.objects.factories;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import de.morphyum.rpgcommander.declarations.monstertypes.Blob;
+import de.morphyum.rpgcommander.declarations.monstertypes.Lizzard;
 import de.morphyum.rpgcommander.declarations.monstertypes.MonsterType;
 import de.morphyum.rpgcommander.objects.Monster;
-import de.morphyum.rpgcommander.declarations.monstertypes.Blob;
 
 public final class MonsterFactory {
 
 	private MonsterFactory() {
 
 	}
+	
+	public static Monster randomMonsterForLevel(int level) {
 
+		Random random = new Random();
+		int type = random.nextInt(MonsterType.TYPE_COUNT);
+		return monsterForLevel(level,type);
+	}
+	
 	public static Monster monsterForLevel(int level, int type) {
 
 		switch (type) {
 		case MonsterType.BLOB: {
-			Blob blob = new Blob();
-			return new Monster(blob.name(), blob.hitPoints() * level, blob.manaPoints() * level, blob.attack() * level, blob.defence() * level, blob.dodge() * level,
-					blob.critical() * level, blob.hitValue() * level, level, blob.xpBonus() * level, blob.lootLevel() * level);
+			Blob monster = new Blob();
+			return new Monster(monster.name(), monster.hitPoints() * level, monster.manaPoints() * level, monster.attack() * level, monster.defence() * level, monster.dodge() * level,
+					monster.critical() * level, monster.hitValue() * level, level, monster.xpBonus() * level, monster.lootLevel() * level);
+		}
+		case MonsterType.LIZZARD: {
+			Lizzard monster = new Lizzard();
+			return new Monster(monster.name(), monster.hitPoints() * level, monster.manaPoints() * level, monster.attack() * level, monster.defence() * level, monster.dodge() * level,
+					monster.critical() * level, monster.hitValue() * level, level, monster.xpBonus() * level, monster.lootLevel() * level);
 		}
 		default: {
-
+			
 		}
 		}
 		return null;
@@ -38,12 +52,17 @@ public final class MonsterFactory {
 	}
 
 	private static Monster[] renameDouble(Monster[] group) {
-		int doubleCount = 2;
+		
 		for (int i = 0; i < group.length; i++) {
 			for (int j = i + 1; j < group.length; j++) {
 				if (group[i].getName().equals(group[j].getName())) {
+					int doubleCount = 1;
+					for(int k = 0; k < j; k++){
+						if(group[k].getName().contains(group[i].getName())){
+							doubleCount++;
+						}
+					}
 					group[j].setName(group[j].getName() + doubleCount);
-					doubleCount++;
 				}
 			}
 		}

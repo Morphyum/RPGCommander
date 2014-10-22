@@ -14,7 +14,7 @@ import de.morphyum.rpgcommander.objects.Weapon;
 import de.morphyum.rpgcommander.objects.factories.MonsterFactory;
 import de.morphyum.rpgcommander.output.JavaConsoleOutput;
 
-//0.4
+//0.5
 public class Main {
 	public static void main(String[] args) throws Exception {
 
@@ -34,21 +34,23 @@ public class Main {
 		
 
 		Hero morphyum = null;
-		while(morphyum == null || morphyum.getLevel()==1 ||morphyum.getLevel()==4){
+		//while(morphyum == null || morphyum.getLevel()==1 ||morphyum.getLevel()==4){
 			morphyum = new Hero(name, level, strength, dexterity, vitality, intelligence, headSlot, bootSlot, chestSlot, weaponSlot, inventory, experience,
 					money);
 			Hero[] heroes = new Hero[1];
 			heroes[0] = morphyum;
-		while (morphyum.getHitPoints() > 0 && morphyum.getLevel() < 4) {
+		//while (morphyum.getHitPoints() > 0 && morphyum.getLevel() < 4) {
 			ArrayList<Monster> monsterList = new ArrayList<Monster>();
-			monsterList.add(MonsterFactory.monsterForLevel(morphyum.getLevel(), MonsterType.BLOB));
-			monsterList.add(MonsterFactory.monsterForLevel(morphyum.getLevel(), MonsterType.BLOB));
-			monsterList.add(MonsterFactory.monsterForLevel(morphyum.getLevel(), MonsterType.BLOB));
+			monsterList.add(MonsterFactory.randomMonsterForLevel(morphyum.getLevel()));
+			monsterList.add(MonsterFactory.randomMonsterForLevel(morphyum.getLevel()));
+			monsterList.add(MonsterFactory.randomMonsterForLevel(morphyum.getLevel()));
+			monsterList.add(MonsterFactory.randomMonsterForLevel(morphyum.getLevel()));
+			monsterList.add(MonsterFactory.randomMonsterForLevel(morphyum.getLevel()));
 			Monster[] monsters = MonsterFactory.makeMonsterGroup(monsterList);
 
 			Battle testBattle = new Battle(heroes, monsters, new JavaConsoleOutput());
 			testBattle.startBattle();
-		}}
+		//}}
 		System.out.println(morphyum.getLevel());
 		
 	}
